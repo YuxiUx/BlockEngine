@@ -32,9 +32,6 @@ Queue is processed imidetly after computation(render) is finished.
  can do is force kill application before your computer freeze too.
  So we're trying make it better.)
 _Our test with same hw - 1,000,000 of blocks with size 25x25px (it's like 33k image)._
- 1 6
- 3 20
- 5 30
 
 ## Installation
 Dependencies:

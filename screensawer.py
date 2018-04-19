@@ -42,8 +42,9 @@ def sporic():
 from blockengine import Block
 from blockengine import Window
 from blockengine import key
+from blockengine.colors import *
 
-from config.colors import *
+#from config.colors import *
 from config.config import *
 import config.engine as eng
 
@@ -52,12 +53,12 @@ ramexploder = []
 
 #wi.Shapes=(0,0)
 
-backg = Block(BLUE, eng.block, (0,0), wi.screen)
-backg2 = Block(BACKGROUND, eng.block, (40,20), wi.screen)
+backg = Block(Blue, eng.block, (0,0), wi.screen)
+backg2 = Block(White, eng.block, (40,20), wi.screen)
 backg3 = Block((0,127,255), eng.block, (30,30), wi.screen)
 
-pl = Block(RED, eng.block, position=(0,0), screen=wi.screen, backg=backg, limit=(50,28))
-pl2 = Block(GREN, eng.block, position=(40,20), screen=wi.screen, backg=backg2, limit=(50,28))
+pl = Block(Red, eng.block, position=(0,0), screen=wi.screen, backg=backg, limit=(50,28))
+pl2 = Block(Green, eng.block, position=(40,20), screen=wi.screen, backg=backg2, limit=(50,28))
 pl3 = Block((75,75,75), eng.block, position=(30,30), screen=wi.screen, backg=backg3, limit=(50,28))
 
 pl.MapKeyboard(up=key.w, down=key.s, left=key.a, right=key.d)
@@ -65,7 +66,7 @@ pl2.MapKeyboard(up=key.UP, down=key.DOWN, left=key.LEFT, right=key.RIGHT)
 
 
 
-backg3 = Block(BLUE, eng.block, (10,10), wi.screen)
+backg3 = Block(Blue, eng.block, (10,10), wi.screen)
 backg3.Render()
 
 wi.AddEvent("KEYDOWN", example)
