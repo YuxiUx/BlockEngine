@@ -2,7 +2,7 @@ import pygame
 class Block:
     """ Code by YuxiUx for HagridCraft
     """
-    def __init__(self,color,size,position, screen, limit=(False,False), backg=False):
+    def __init__(self,color,size,position, screen, limit=(False,False), backg=False, OnColision=False):
         self.ox, self.oy = position
         self.x, self.y = position
         self.w, self.h = size
@@ -17,13 +17,14 @@ class Block:
         self.key_down = False
         self.key_left = False
         self.key_right = False
+        self.OnColision = OnColision if OnColision else lambda x,y: ''
     def Move(self,x=0,y=0):
         self.x = x
         self.y = y
         self.validPos()
     def Movr(self,x=0,y=0):
-        self.x += x
-        self.y += y
+        self.x += x * self.Boost
+        self.y += y * self.Boost
         self.validPos()
     def recountPos(self):
         x = self.x - self.ox
@@ -61,6 +62,8 @@ class Block:
                 self.y = self.maxY
                 stat.append("BOTTOM")
         self.ColidStat = stat
+        if stat:
+            self.OnColision(stat, self)
     def MapKeyboard(self, up=False, down=False, left=False, right=False):
         self.key_up = up
         self.key_down = down
@@ -69,11 +72,11 @@ class Block:
     def lisner(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == self.key_right:
-                self.Movr(1*self.Boost)
+                self.Movr(1)
             if event.key == self.key_down:
-                self.Movr(0,1*self.Boost)
+                self.Movr(0,1)
             if event.key == self.key_left:
-                self.Movr(-1*self.Boost)
+                self.Movr(-1)
             if event.key == self.key_up:
-                self.Movr(0,-1*self.Boost)
+                self.Movr(0,-1)
             self.Render()
