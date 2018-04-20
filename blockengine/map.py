@@ -8,5 +8,5 @@ class Map:
         self.backcolor = backcolor
         self.layerBackground = np.ndarray(self.size)
 
-t = Map()
-print(t.layerBackground)
+#t = Map()
+#print(t.layerBackground)
