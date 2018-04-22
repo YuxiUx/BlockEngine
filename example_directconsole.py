@@ -42,7 +42,7 @@ import config.engine as eng
       
 '''
 
-wi = Window(title="Debug example - press K", size=(900,700)) # create window
+wi = Window(title="Debug example - press K", size=(900,700), FPS=10) # create window
 
 
 debug = DirectDebugConsole(key.k, locals(), locals()) # create debug console instance

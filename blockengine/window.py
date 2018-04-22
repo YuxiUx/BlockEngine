@@ -77,7 +77,7 @@ class Window:
                                 self.handleEvents(event, "MOUSEBUTTONDOWN")
             self.loopLoop(self._lops)
             self.updateDisplay()
-            self._fpslast = self.fpsClock.tick(1000/self.Fps)
+            self._fpslast = self.fpsClock.tick(self.Fps)
     def handleEvents(self, event, type):
         if type in self._events:
             for eve in self._events[type]:
