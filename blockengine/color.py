@@ -749,3 +749,8 @@ Yellow_Orange		= (255, 174, 66)
 Yellow_green		= (154, 205, 50)
 Zaffre			= (0, 20, 168)
 Zinnwaldite_brown	= (44, 22, 8)
+def FromHex(colorhex):
+    h = colorhex.lstrip('#')
+    if len(h)!=6:
+        raise ValueError('Ivalid hex color code')
+    return tuple(int(h[i:i+2], 16) for i in (0, 2 ,4))

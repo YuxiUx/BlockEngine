@@ -2,7 +2,7 @@ import random
 from blockengine import Block
 from blockengine import Window
 from blockengine import key
-from blockengine.colors import *
+from blockengine.color import *
 
 from config.config import *
 import config.engine as eng

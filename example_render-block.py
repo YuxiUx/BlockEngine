@@ -1,6 +1,6 @@
 from blockengine import Block
 from blockengine import Window
-from blockengine.colors import *
+from blockengine.color import *
 
 import config.engine as eng
 

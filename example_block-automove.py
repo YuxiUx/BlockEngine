@@ -1,7 +1,7 @@
 from blockengine import Block
 from blockengine import Window
 from blockengine import key
-from blockengine import colors as c
+from blockengine import color as c
 
 import config.engine as eng
 
