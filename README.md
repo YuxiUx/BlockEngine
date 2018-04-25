@@ -40,11 +40,19 @@ Dependencies:
 * numpy
 
 Current best way to use BlockEngine:
-1. fork this project
+1. fork or/and clone this project
 2. install dependence's
 3. (remove examples - not necessary)
 4. edit/update config as you need
 5. now everything is ready
+
+Linux users can now use installer thats make all necessary steps automatic.
+Installer is probably compatibile with all linux distributions (and any OS with Bash).
+If you already clone this repository run only second line.
+```sh
+wget https://raw.githubusercontent.com/YuxiUx/BlockEngine/master/install.sh
+bash install.sh
+```
 
 This is still prealpha version. Since first stable release is recommended way installation via pip
 
