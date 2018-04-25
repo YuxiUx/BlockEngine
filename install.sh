@@ -6,56 +6,62 @@ PYDEPS="pygame numpy"
 PROJNAME="BlockEngine"
 
 gitClone() { 
-  echo "Cloning repository";
+  cprn INFO "Cloning repository";
   git clone $GITURL
   cd BlockEngine
 }
 installDepneds() {
-  echo "Install python dependeces...";
-  pip3 install pygame $PYDEPS || { 
-      echo 'sorry instalation failed we need a sudo' ;
+  cprn INFO 'Install python dependeces...';
+  pip3 install $PYDEPS || { 
+      cprn W 'Sorry instalation failed. Attempt to install with sudo';
       sudo pip3 install $PYDEPS ;
   }
 }
 checkDeps() {
-    echo "Checking system dependences";
-    echo "[Checking] Git";
+    cprn INFO 'Checking system dependences';
+    cprn C Git;
     command -v git >/dev/null 2>&1 || { 
-      echo >&2 "Required git but it's not installed.  Aborting."; exit 1; }
-    echo "OK";
-    echo "[Checking] python3";
+      cprn F "Git not found.  Aborting."; exit 1; }
+    cprn E;
+    cprn C python3;
     command -v python3 >/dev/null 2>&1 || { 
-      echo >&2 "Required python3 but it's probably not installed. Trying find another compatibile version"; 
       command -v python >/dev/null 2>&1 || {
-        echo >&2 "Definetly you need to install python 3"; exit 1; }
+        cprn F "Python not found. You need to install python 3. Aborting."; exit 1; }
       pyv=$(python -c 'import sys; print(sys.version_info.major)')
-      if (( pyv > 2 )); then 
-        echo 'Compatibile version of python found';
-       else 
-        echo 'You have python 2 but 3 is required'; exit 1;
-      fi;
+      [[ pyv > 2 ]] || { cprn F 'You have python 2 but 3 is required. Aborting.'; exit 1; }
     }
-    echo "OK";
-    echo "[Checking] pip3";
+    cprn E;
+    cprn C pip3;
     command -v pip3 >/dev/null 2>&1 || {
-      echo >&2 "Required pip3 but it's not installed. You can install python dependences manualy"; exit 1;}
-    echo "OK";
+      cprn F "pip3 not found.  You can install python dependences manualy"; exit 1;}
+    cprn E;
 }
 checkName() {
-    gitname=$(git remote -v | head -n1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//');
+    gitname="$(git remote -v | head -n1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//')";
     [[ $PROJNAME == $gitname ]] && {
-        echo "Already cloned. continue to install dependences";
+        cprn INFO "Already cloned. continue to install dependences";
         cont;
-      } || echo "You are in another git repository - you dont need install this here";
+      } || cprn W "You are in another git repository ($gitname)- you don't want to install this here";
 }
 isRepository() {
   if [ -d .git ]; then
-    echo 'You are already in repository';
+    cprn INFO 'You are already in repository';
     checkName;
   else
     gitClone;
     cont;
   fi;
+}
+
+cprn() {
+    case $1 in
+      "F") printf "\e[41m[FAIL] $2 \e[0m\n";;
+      "W") printf "\e[43m[WARING] $2 \e[0m\n";;
+      "C") printf "\e[44m[CHECKING] $2... ";;
+      "E") printf "OK\e[0m\n";;
+      "N") printf "$2";;
+      *)   printf "\e[0m[$1] $2 \r\n";;
+    esac
 }
 
 cont() {
